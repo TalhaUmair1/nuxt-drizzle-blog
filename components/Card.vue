@@ -1,6 +1,7 @@
 <template>
     <NuxtLink :to="`/posts/${card.id}`">
-        <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-green-800 dark:border-gray-700">
+        <div
+            class="max-w-sm bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 border border-gray-200 rounded-lg shadow dark:bg-green-800 dark:border-gray-700">
             <a href="#">
                 <img :src="`${card.image}`" />
             </a>

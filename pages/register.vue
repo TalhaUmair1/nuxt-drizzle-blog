@@ -1,6 +1,7 @@
 <template>
     <div class="w-full">
-        <div class="w-full flex flex-col justify-center items-center h-screen">
+        <div
+            class="w-full bg-gradient-to-r from-teal-200 to-lime-200 flex flex-col justify-center items-center h-screen">
             <UForm :schema="schema" :state="state" class="max-w-md w-full " @submit="onSubmit">
                 <UFormGroup label="Name" name="Name">
                     <UInput v-model="state.name" placeholder="Name" size="lg" />
@@ -34,7 +35,6 @@ const schema = z.object({
     password: z.string().min(8, 'Must be at least 8 characters')
 })
 
-type user = z.infer<typeof schema>
 
 const state = reactive({
     name: undefined,
@@ -44,13 +44,13 @@ const state = reactive({
 
 const { fetch } = useUserSession()
 
-async function onSubmit(event: FormSubmitEvent<user>) {
+async function onSubmit(event) {
     $fetch('/api/auth/register', {
         method: 'POST',
         body: JSON.stringify(event.data)
     }).then(() => {
         fetch()
-        navigateTo('/')
+        navigateTo('/dashboard')
     })
 }
 

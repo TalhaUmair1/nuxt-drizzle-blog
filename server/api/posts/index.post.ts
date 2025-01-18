@@ -3,18 +3,18 @@ import { useValidatedBody, z } from 'h3-zod'
 export default defineEventHandler(async (event) => {
   const body = await useValidatedBody(event, {
     title: z.string(),
-    description: z.string(),
-    isPublished: z.number().int().min(0).max(1),
+    content: z.string(),
+    is_published: z.number().int().min(0).max(1),
   })
 
-  const { title, description, isPublished } = body
+  const { title, content, is_published } = body
 
   const post = await useDatabase()
     .insert(tables.posts)
     .values({
       title,
-      content: description,
-      isPublished,
+      content,
+      is_published,
     })
     .returning()
 

@@ -24,4 +24,7 @@ logs
 !.env.example
 
 # DataBase
-local.db
+localdb
+
+# vs code
+.vscode
