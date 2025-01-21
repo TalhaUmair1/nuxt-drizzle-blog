@@ -13,6 +13,7 @@ export const posts = sqliteTable('posts', {
   title: text('title').notNull(),
   content: text('content').notNull(),
   is_published: integer('is_published').notNull().default(0),
+  image: text('image'),
   userId: integer('user_id').references(() => users.id),
   createdAt: text('created_at')
     .notNull()

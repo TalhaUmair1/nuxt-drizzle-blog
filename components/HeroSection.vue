@@ -3,7 +3,7 @@
         <Navbar />
         <div class="flex flex-col items-start justify-end py-20 px-10 w-full  h-full">
             <div class="max-w-lg">
-                <UButton size="md" color="gray-900 bg-gradient-to-r from-teal-200 to-lime-200">Destination</UButton>
+                <UButton size="md" class="gray-900 bg-gradient-to-r from-teal-200 to-lime-200">Destination</UButton>
 
                 <h4 class="text-2xl font-bold text-purple-900 my-4">Tourism is travel for pleasure, and terms
                     and staying in places outside their usual</h4>

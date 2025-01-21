@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { eq, and } from 'drizzle-orm'
 import { useValidatedParams, useValidatedBody, z, zh } from 'h3-zod'
 
 export default defineEventHandler(async (event) => {
@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const params = await useValidatedParams(event, {
     id: zh.intAsString,
   })
-
+  const { user } = await requireUserSession(event)
   const { id } = params
   const { title, content, is_published } = body
 
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       content,
       is_published,
     })
-    .where(eq(tables.posts.id, id))
+    .where(and(eq(tables.posts.id, id), eq(tables.posts.userId, user.id)))
     .returning()
     .get()
 

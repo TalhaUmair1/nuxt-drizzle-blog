@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm'
+import { eq, and } from 'drizzle-orm'
 import { useValidatedParams, zh } from 'h3-zod'
 
 export default defineEventHandler(async (event) => {
@@ -6,10 +6,12 @@ export default defineEventHandler(async (event) => {
     id: zh.intAsString,
   })
 
+  const { user } = await requireUserSession(event)
+
   const { id } = params
   const post = await useDatabase()
     .delete(tables.posts)
-    .where(eq(tables.posts.id, id))
+    .where(and(eq(tables.posts.id, id), eq(tables.posts.userId, user.id)))
     .returning()
     .get()
 

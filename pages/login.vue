@@ -3,7 +3,6 @@
         <div
             class="w-full bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 flex flex-col justify-center items-center h-screen">
             <UForm :schema="schema" :state="state" class="max-w-md w-full " @submit="onSubmit">
-
                 <UFormGroup label="Email" name="email">
                     <UInput v-model="state.email" placeholder="Email" size="lg" />
                 </UFormGroup>

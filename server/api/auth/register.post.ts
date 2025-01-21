@@ -24,5 +24,14 @@ export default defineEventHandler(async (event) => {
     .returning()
     .get()
 
-  return user
+  await setUserSession(event, {
+    user: {
+      id: user.id,
+      name,
+      email,
+    },
+    loggedInAt: Date.now(),
+  })
+
+  return setResponseStatus(event, 201)
 })
