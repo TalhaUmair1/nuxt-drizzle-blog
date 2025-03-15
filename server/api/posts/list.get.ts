@@ -1,4 +1,4 @@
-import { asc } from 'drizzle-orm'
+import { asc, sql } from 'drizzle-orm'
 import { useValidatedParams, useValidatedQuery, z, zh } from 'h3-zod'
 export default defineEventHandler(async (event) => {
   // const { user } = await requireUserSession(event)
@@ -16,7 +16,14 @@ export default defineEventHandler(async (event) => {
 
   const db = useDatabase()
   const posts = await db
-    .select()
+    .select({
+      id: tables.posts.id,
+      title: tables.posts.title,
+      image: tables.posts.image,
+      content: sql<string>`substr(${tables.posts.content}, 1, 60)`.as(
+        'content'
+      ),
+    })
     .from(tables.posts)
     // .where(eq(tables.posts.userId, user.id))
     .orderBy(asc(tables.posts.id))

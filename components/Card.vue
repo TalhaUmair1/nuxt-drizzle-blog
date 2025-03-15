@@ -3,7 +3,7 @@
         <div
             class="max-w-sm bg-gradient-to-r from-red-200 via-red-300 to-yellow-200 border border-gray-200 rounded-lg shadow dark:bg-green-800 dark:border-gray-700">
             <a href="#">
-                <img :src="`${card.image}`" />
+                <img class="h-72" :src="`${card.image}`" />
             </a>
             <div>
                 <h2 class="my-2 text-xl text-red-600 mx-6">

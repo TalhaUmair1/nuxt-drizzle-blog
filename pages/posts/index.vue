@@ -14,7 +14,7 @@ definePageMeta({
 const page = ref(1)
 const perPage = ref(3)
 
-const { data: posts } = await useFetch('/api/posts')
+const { data: posts } = await useFetch('/api/posts/list')
 console.log('posts', posts)
 
 

@@ -25,6 +25,9 @@
                     </div>
                 </template>
             </UTable>
+            <div class="flex justify-end px-3 py-3.5 border-t border-gray-200 dark:border-gray-700">
+                <UPagination v-model="page" :page-count="pageCount" :total="posts.length" />
+            </div>
         </div>
 
         <div>
@@ -67,6 +70,10 @@ import { z } from "zod";
 definePageMeta({
     middleware: 'auth'
 })
+const page = ref(1)
+const perPage = 5
+
+
 
 const columns = [
     {
@@ -95,9 +102,12 @@ const modal = ref(false);
 const showModal = () => {
     modal.value = !modal.value;
 };
-
-const { data: posts } = await useFetch("/api/posts");
-// console.log("posts", posts);
+// watch(page, async () => {
+//     const data = await $fetch(`/api/posts/list?pageSize=${perPage.value}&page=${page.value}`)
+//     posts.value = data
+// })
+const { data: posts } = await useFetch("/api/posts?page=1&pageSize=5");
+console.log("posts", posts);
 
 const schema = z.object({
     title: z.string(),
